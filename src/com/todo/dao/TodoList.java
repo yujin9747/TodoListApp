@@ -1,10 +1,10 @@
 package com.todo.dao;
-
+  
 import java.util.*;
 
 import com.todo.service.TodoSortByDate;
 import com.todo.service.TodoSortByName;
-
+ 
 public class TodoList {
 	private List<TodoItem> list;
 
@@ -36,8 +36,6 @@ public class TodoList {
 	}
 
 	public void listAll() {
-		System.out.println("\n"
-				+ "inside list_All method\n");
 		for (TodoItem myitem : list) {
 			System.out.println(myitem.getTitle() + myitem.getDesc());
 		}
