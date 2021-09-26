@@ -3,6 +3,7 @@ package com.todo.dao;
 import java.util.*;
 
 import com.todo.service.TodoSortByDate;
+import com.todo.service.TodoSortByDateDesc;
 import com.todo.service.TodoSortByName;
  
 public class TodoList {
@@ -36,8 +37,10 @@ public class TodoList {
 	}
 
 	public void listAll() {
-		for (TodoItem myitem : list) {
-			System.out.println(myitem.getTitle() + myitem.getDesc());
+		int i=1 ;
+		for (TodoItem item : list) {
+			System.out.println(i + ". [" + item.getCategory() + "] " + item.getTitle() + " - " + item.getDesc() + " - " + item.getDue_date() + " - " + item.getCurrent_date());
+			i++ ;
 		}
 	}
 	
@@ -58,5 +61,23 @@ public class TodoList {
 			if (title.equals(item.getTitle())) return true;
 		}
 		return false;
+	}
+
+	public void sortByDateDesc() {
+		Collections.sort(list, new TodoSortByDateDesc());
+	}
+
+	public void sortByCat() {
+		HashSet<String> hs =  new HashSet<String>() ;
+		for (TodoItem item : list) {
+			hs.add(item.getCategory()) ;
+		}
+		Iterator<String> iter = hs.iterator();
+
+		while (iter.hasNext()) {
+		    System.out.print(iter.next() + " / ");
+		}
+		System.out.printf("총 %d개의 카테고리가 있습니다.\n", hs.size()) ;
+		
 	}
 }
