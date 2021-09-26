@@ -11,13 +11,14 @@ public class TodoMain {
 		TodoList l = new TodoList();
 		boolean isList = false;
 		boolean quit = false;
+		String choice = " " ;
 		TodoUtil.loadList(l, "todolist.txt") ;
 		Menu.displaymenu();
 		do {
 	
 			isList = false;
 			Menu.prompt() ;
-			String choice = sc.next();
+			choice = sc.next();
 			switch (choice) {
 
 			case "add":
@@ -54,6 +55,17 @@ public class TodoMain {
 				l.sortByDate();
 				isList = true;
 				break;
+				
+			case "ls_date_desc":
+				System.out.println("항목이 입력된 역순서대로 정렬합니다.") ;
+				l.sortByDateDesc();
+				isList = true;
+				break;
+				
+			case "ls_cat":
+				System.out.println("카테고리를 출력합니다.") ;
+				l.sortByCat() ;
+				break;
 
 			case "exit":
 				quit = true;
@@ -62,9 +74,17 @@ public class TodoMain {
 			case "help" :
 				Menu.displaymenu();
 				break ;
+			case "find" :
+				String keyword = sc.next();
+				TodoUtil.find(l, keyword);
+				break ;
+				
+			case "find_cat" :
+				String find_cat_keyword = sc.next();
+				TodoUtil.find_cat(l, find_cat_keyword);
+				break ;
 			default:
 				System.out.println("잘못 입력하셨습니다! 관리 명령어 사용법이 필요하시면 help를 입력해주세요");
-				choice = sc.next();
 				break;
 			}
 			
@@ -74,3 +94,4 @@ public class TodoMain {
 		sc.close() ;
 	}
 }
+
